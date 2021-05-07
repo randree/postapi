@@ -45,7 +45,8 @@ class PostApiWindow(Gtk.Window):
                 self.params2.get_text(), 
                 self.params3.get_text(), 
                 self.cookie1.get_text(), 
-                self.cookie2.get_text())
+                self.cookie2.get_text(),
+                self.request_method.get_active())
 
         types = (GObject.TYPE_STRING,)
         store = Gtk.ListStore.new(types)
@@ -172,6 +173,7 @@ class PostApiWindow(Gtk.Window):
         self.params3.set_text(r['param3'])
         self.cookie1.set_text(r['cookie1'])
         self.cookie2.set_text(r['cookie2'])
+        self.request_method.set_active(r['method'])
 
     def on_click_me_clicked(self, button):
         treeiter = self.request_method.get_active_iter()

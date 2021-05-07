@@ -15,7 +15,8 @@ class Database:
                                             param2 text NULL,
                                             param3 text NULL,
                                             cookie1 text NULL,
-                                            cookie2 text NULL
+                                            cookie2 text NULL,
+                                            method INTEGER DEFAULT 0
                                         ); """
 
         if self.conn is not None:
@@ -39,11 +40,11 @@ class Database:
         except Error as e:
             print(e)
 
-    def write(self, url, param1, param2, param3, cookie1, cookie2):
+    def write(self, url, param1, param2, param3, cookie1, cookie2, method):
         if url != "":
             try:
                 c = self.conn.cursor()
-                c.execute("INSERT OR REPLACE INTO history(url, param1, param2, param3, cookie1, cookie2) VALUES (?,?,?,?,?,?)", (url, param1, param2, param3, cookie1, cookie2))
+                c.execute("INSERT OR REPLACE INTO history(url, param1, param2, param3, cookie1, cookie2, method) VALUES (?,?,?,?,?,?,?)", (url, param1, param2, param3, cookie1, cookie2, method))
                 self.conn.commit()
                 c.close()
             except Error as e:
